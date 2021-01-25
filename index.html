@@ -256,6 +256,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gwing77.github.io.git/2021/01/25/%E5%8C%BA%E5%9D%97%E9%93%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iidmx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/25/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url">区块链</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-25T20:40:34+08:00">
+                2021-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="区块链"><a href="#区块链" class="headerlink" title="区块链"></a>区块链</h2><p>今天上课讲了分布式，后来引申到了区块链，听得云里雾里，自己业余时间整理一下知识。看了一个B站上的视频放上连接:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ii4y1L7oG?from=search&seid=16594959336768417820">大约50分钟</a> ,博主叫狂浪大哥，但是听着像女的。。</p>
+<h3 id="啥是区块链"><a href="#啥是区块链" class="headerlink" title="啥是区块链"></a>啥是区块链</h3><p>去中心化分布式网络，加密技术保护信息安全，是公开的账本，是一个巨大的数据库</p>
+<ul>
+<li>去中心化：分布式网络和中心式网络的区别在于中心式网络结构下，服务器要是坏了就完了，但是分布式网络中任何一个节点挂了不会影响其它节点的工作</li>
+<li>公开的账本：记录所有人的交易信息，区块链技术就是记账，我转账的时候会广播信息，“节点1号给节点2号转账10个比特币”，这样看来这种交易保护了用户的个人信息，这个转账的过程（我够不够钱，有没有资格转账）是由任意其它节点审核，打包的交易信息叫一个区块</li>
+<li>加密技术：<ul>
+<li><strong>哈希函数</strong>：是一系列函数算法的总成，主要功能就是给大家加密 haval/MD5/sha-256</li>
+<li><strong>哈希函数的特点</strong>:<br>  1.等长（加密完了之后都是64位）<br>  2.防碰撞性，不会有两个加密完了也一样，可以用来对比文档是否修改了<br>  3.隐藏性：已知哈希值，几乎无法倒推出输入内容（蛮力求解是唯一的方式）</li>
+<li><strong>哈希算法和区块链的关系</strong>：区块=块头（上一个区块的哈希值+Nounce随机数）+块身（交易记录），<strong>最新区块里面的哈希值其实包含了之前所有区块的内容</strong></li>
+<li><strong>为什么说安全</strong>：只要修改了一个区块的内容，最新的区块的哈希值都会改变，所有人都会发现，就可以跟踪到哪一个区块有了改变</li>
+<li><strong>非对称加密</strong>：加密和解密需要两个不同的密钥，公钥和私钥<br>  1.加密信息：使用目标对象的公钥加密消息内容，只有他能解密<br>  2.作为数字签名，证明身份：使用私钥加密消息得到一个签名哈希值，对方使用我的公钥对消息内容求哈希值，再用我的公钥解密我的签名得到哈希值，就知道是不是我发的消息了</li>
+</ul>
+</li>
+<li>数据库： 好多好多区块联系在一起</li>
+</ul>
+<h3 id="啥是比特币"><a href="#啥是比特币" class="headerlink" title="啥是比特币"></a>啥是比特币</h3><p>运用区块链技术设计出来的加密货币，比特币是其中最火的一种。<br>1.拥有比特币的人是如何交易的？<br>    - A输入自己的公钥签名和比特币的来源（铸币权或是转账记录），输出B公钥的哈希值<br>    - B输入自己的公钥和比特币来源（A转账给我的交易记录的哈希值），输出C的公钥的哈希值<br>    - 以此循环，比特币交易记录上能记录着比特币的完整来源<br>2.挖矿能得到什么奖励呢？<br>    - 之后每生成一个新的区块，系统就会给出矿奖励，也就叫做铸币权，每一个新区快给50个，每过21W个区块就会减半，目前已经降到6.25个，折合60多万人民币<br>    - 挖出比特币的时候，还会得到一笔<strong>交易费</strong>，交易费是挖出的区块里面所有交易费的总和（交易的时候可能会支付一点交易费，自愿的）<br>3.什么是挖矿？挖矿的过程是已知上一个区块的哈希值，和已经收集到一大堆交易记录之后，找到一个合适的随机数Nounce，让整个区块满足比特币的<strong>难度要求</strong>（打包之后的整个区块的哈希值必须以若干个0开头，0的个数越多越难），这个过程叫做工作量证明。系统会自动调整挖矿难度，这个真的很难，<br>4.如何成功挖矿？<br>    - 算力：计算机每秒能尝试多少个随机数，普通CPU：5k/s,GPU:4600w/s,矿机:14w亿/s<br>    - 运气：也不排除一次就试对了<br>    - 难度：每2016个区块会自动调整一次难度（多少个0开头），让出块间隔时间大约是10分钟左右<br>    - 电费：一台矿机一年电费5794元左右，2019年全世界挖矿使用的电，比瑞士国家用电都多<br>    - <strong>伯努利尝试</strong>：无数次的失败也无法增加成功的机率<br>5.还有多少比特币？BTC的总量是2100万个，目前已经挖出1850万了，但是理论上比特币是挖不完的，因为一直在减半<br>6.比特币活动？挖矿/炒比特币<br>7.<strong>比特币的危害</strong>：<br>    - 黑市/暗网交易<br>    - 如果某一天一个组织占据了51%的算力，相当于这个比特币市场也变成中心化的了</p>
+<h3 id="区块链的应用"><a href="#区块链的应用" class="headerlink" title="区块链的应用"></a>区块链的应用</h3><p>银行/政府/金融/医疗/教育/供应链管理<br>利用区块链的透明性/保密性，让这个社会更安全</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gwing77.github.io.git/2021/01/24/first-blog/index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -628,7 +817,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -639,7 +828,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -650,7 +839,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -715,6 +904,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi.li</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">1.8k</span>
   
 </div>
 
