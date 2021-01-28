@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="知识,分布式,dubbo," />
+  <meta name="keywords" content="分布式,缓存,redis," />
 
 
 
@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="服务调用（上）Nacos可以在AP和CP模式之间切换，是中国人的中庸思想中国人设计东西就是很有意思，有的时候就受一些儒家传统文化影响，有的时候就很浪漫主义，想起来前一阵看到嫦娥带回月壤，作为容灾机制，一部分月壤存放在了毛主席故乡，因为当年主席说过可上九天揽月，这回终于实现了 分布式服务浅谈1.理解RPC：程序调用另一个空间地址的过程或是函数的过程，不用程序员显示编码这个远程调用的细节2.RPC发展">
+<meta name="description" content="分布式技术：缓存记住一点，先更新数据库，再删除缓存，太绕了。 浅谈分布式缓存缓存的原理、引入和设计1.缓存的最初含义，是指用于加速CPU数据交换的RAM，这是狭义的缓存定义。广义的缓存定义更加宽泛，任何可以用于数据高速交换的存储介质都是缓存，可以是硬件也可以是软件，包括各种缓存组件和技术2.缓存的基本思想  时间局限性原理：被获取过一次的数据在未来会被多次引用 以空间换时间：开辟一块高速的独立空间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0126note">
-<meta property="og:url" content="https://gwing77.github.io.git/2021/01/26/0126note/index.html">
+<meta property="og:title" content="0128note">
+<meta property="og:url" content="https://gwing77.github.io.git/2021/01/28/0128note/index.html">
 <meta property="og:site_name" content="iidmx">
-<meta property="og:description" content="服务调用（上）Nacos可以在AP和CP模式之间切换，是中国人的中庸思想中国人设计东西就是很有意思，有的时候就受一些儒家传统文化影响，有的时候就很浪漫主义，想起来前一阵看到嫦娥带回月壤，作为容灾机制，一部分月壤存放在了毛主席故乡，因为当年主席说过可上九天揽月，这回终于实现了 分布式服务浅谈1.理解RPC：程序调用另一个空间地址的过程或是函数的过程，不用程序员显示编码这个远程调用的细节2.RPC发展">
+<meta property="og:description" content="分布式技术：缓存记住一点，先更新数据库，再删除缓存，太绕了。 浅谈分布式缓存缓存的原理、引入和设计1.缓存的最初含义，是指用于加速CPU数据交换的RAM，这是狭义的缓存定义。广义的缓存定义更加宽泛，任何可以用于数据高速交换的存储介质都是缓存，可以是硬件也可以是软件，包括各种缓存组件和技术2.缓存的基本思想  时间局限性原理：被获取过一次的数据在未来会被多次引用 以空间换时间：开辟一块高速的独立空间">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-01-26T11:23:34.000Z">
-<meta property="article:modified_time" content="2021-01-27T11:34:46.585Z">
+<meta property="article:published_time" content="2021-01-28T08:34:17.000Z">
+<meta property="article:modified_time" content="2021-01-28T13:13:21.993Z">
 <meta property="article:author" content="jiayi.li">
-<meta property="article:tag" content="知识">
 <meta property="article:tag" content="分布式">
-<meta property="article:tag" content="dubbo">
+<meta property="article:tag" content="缓存">
+<meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary">
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://gwing77.github.io.git/2021/01/26/0126note/"/>
+  <link rel="canonical" href="https://gwing77.github.io.git/2021/01/28/0128note/"/>
 
 
 
 
 
-  <title>0126note | iidmx</title>
+  <title>0128note | iidmx</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gwing77.github.io.git/2021/01/26/0126note/">
+    <link itemprop="mainEntityOfPage" href="https://gwing77.github.io.git/2021/01/28/0128note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">0126note</h1>
+          <h1 class="post-title" itemprop="name headline">0128note</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-26T19:23:34+08:00">
-                2021-01-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-28T16:34:17+08:00">
+                2021-01-28
               </time>
             
 
@@ -350,7 +350,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.7k
                 </span>
               
 
@@ -387,68 +387,71 @@
       
 
       
-        <h1 id="服务调用（上）"><a href="#服务调用（上）" class="headerlink" title="服务调用（上）"></a>服务调用（上）</h1><p>Nacos可以在AP和CP模式之间切换，是中国人的中庸思想<br><strong>中国人设计东西就是很有意思，有的时候就受一些儒家传统文化影响，有的时候就很浪漫主义，想起来前一阵看到嫦娥带回月壤，作为容灾机制，一部分月壤存放在了毛主席故乡，因为当年主席说过可上九天揽月，这回终于实现了</strong></p>
-<h2 id="分布式服务浅谈"><a href="#分布式服务浅谈" class="headerlink" title="分布式服务浅谈"></a>分布式服务浅谈</h2><p>1.理解RPC：程序调用另一个空间地址的过程或是函数的过程，不用程序员显示编码这个远程调用的细节<br>2.RPC发展的四个阶段</p>
+        <h1 id="分布式技术：缓存"><a href="#分布式技术：缓存" class="headerlink" title="分布式技术：缓存"></a>分布式技术：缓存</h1><p>记住一点，先更新数据库，再删除缓存，太绕了。</p>
+<h2 id="浅谈分布式缓存"><a href="#浅谈分布式缓存" class="headerlink" title="浅谈分布式缓存"></a>浅谈分布式缓存</h2><h3 id="缓存的原理、引入和设计"><a href="#缓存的原理、引入和设计" class="headerlink" title="缓存的原理、引入和设计"></a>缓存的原理、引入和设计</h3><p>1.缓存的最初含义，是指用于加速CPU数据交换的RAM，这是狭义的缓存定义。广义的缓存定义更加宽泛，任何可以用于数据高速交换的存储介质都是缓存，可以是硬件也可以是软件，包括各种缓存组件和技术<br>2.缓存的基本思想</p>
 <ul>
-<li>接口达成jar包，通过socket通信</li>
-<li>java封装的RMI，不支持跨语言</li>
-<li>http+XML webservice，支持跨语言</li>
-<li>http+json更加轻量化从，不用传输XML，后面就统一叫RPC</li>
+<li>时间局限性原理：被获取过一次的数据在未来会被多次引用</li>
+<li>以空间换时间：开辟一块高速的独立空间，提供高效的访问</li>
+<li>性能成本Tradoff：访问延迟越低（性能越高），等容量的成本越大</li>
 </ul>
-<p>3.RPC使用到哪些技术？</p>
+<p>3.缓存的优势：实际业务场景中，缓存里面存的往往都是需要频繁访问的中间数据甚至最终结果，一般比db中的东西小很多</p>
 <ul>
-<li>如何建立通信：成熟的网络通信框架，dubbo和motan使用的都是netty</li>
-<li>如何进行网络传输：传输数据序列化和反序列化，Hessian</li>
-<li>服务注册于发现：负载均衡算法，服务下线或者变更的时候，生产者和消费者之间要能保持正常的通讯<ul>
-<li>zookeeper：dubbo+zookeeper是标配，主CP</li>
-<li>eureka: 从2.0开始netflix停更了</li>
-<li>nacos：来自阿里，可以在CP和AP之间切换，中庸之道 </li>
+<li>提升访问性能</li>
+<li>降低网络拥堵</li>
+<li>减轻服务负载</li>
+<li>增强可扩展性</li>
+</ul>
+<p>4.缓存的代价</p>
+<ul>
+<li>增加系统复杂度</li>
+<li>系统部署运行费用更高</li>
+<li>多份数据的一致性问题</li>
+</ul>
+<p>5.业务系统读写缓存的三种模式<br>三种模式各有优劣，不存在最佳模式，没法做出完美的缓存模式</p>
+<ul>
+<li>Cache Aside 旁路缓存：使用较多的一种缓存读写模式，比较适合读写请求很多的场景，服务端先更新DB，再删除Cache，这样就算缓存里面数据没有写入成功，以数据库为主是没问题的</li>
+<li>Read/Write Through 读写穿透： 本质上是封装了旁路缓存，发生读写请求的时候，如果cache-miss，旁路缓存是服务写入，本类是客户端写入</li>
+<li>Write Behind Caching 异步缓存写入: 只更新缓存，异步更新DB，非常适合数据经常变化，但是对数据一致请要求不高的场景，比如浏览量点击量等等</li>
+</ul>
+<p>6.缓存的分类<br>按照宿主层次分类分为本地缓存（业务系统重启的时候会丢失）、进程间缓存（业务系统缓存都在相同宿主机，维护困难，存在资源竞争）、远程缓存（跨机器部署独立设备），后两者常见Mc，redis，就是部署地点不同<br>按照存储介质分类分为内存性缓存（Mc是典型的内存型缓存）和持久型缓存（放在硬盘中，不怕重启）</p>
+<p>7.如何设计架构缓存</p>
+<ul>
+<li>确定缓存组件</li>
+<li>涉及缓存数据结构，redis支持复杂的集合数据类型</li>
+<li>缓存分布设计<ul>
+<li>选择分布式算法，取模还是一致性hash</li>
+<li>分布读写访问的实施</li>
+<li>数据量增长系统遇到性能瓶颈的时候，将数据从缓存节点进行动态拆分，部分数据水平迁移</li>
 </ul>
 </li>
 </ul>
-<p>4.关于配置管理：</p>
+<h3 id="七大缓存经典问题"><a href="#七大缓存经典问题" class="headerlink" title="七大缓存经典问题"></a>七大缓存经典问题</h3><p>1.缓存失效，大量的key同时过期。解决方法：过期时间使用base时间+随机时间生成<br>2.缓存穿透：有特殊访客查询不存在的key，每次都要穿透到DB查询，大量的请求或是恶意的请求会对系统带来很大压力。解决方法：DB也查不到的时候，在缓存中反写一个特殊值或者使用bloomFilter先判断key是否存在<br>3.缓存雪崩：使系统运行过程中非常严重的问题，雪崩是指部分缓存节点不可用，导致整个缓存体系甚至服务不可用的情况，根据缓存是否支持rehash分两种情况。推荐方案增加数据库读写开关，阻塞或请求超过阈值的时候关闭开关<br>4.数据不一致：大多和更新异常有关。推荐方案缓存更新失败时重试，将失败的key写入队列机服务，待缓存恢复访问后删除<br>5.数据并发竞争：高并发场景下，一旦缓存访问没有数据，会有大量并发查询数据库，而这个数据key刚好过期。解决方案有缓存请求miss时请求数据时加全局锁或做缓存备份<br>6.hot key：这是一个经典问题，访问数据量很大的就是hot key，比如微博的热点事件，突发事件的时候，这个hot key的缓存节点容易卡顿过载，易打破物理网卡带宽CPU极限，解决方法预判hotkey，突发事件的话需要用算法计算找出，找到之后才能处理，可以分散处理、本地缓存、多级缓存架构<br>7.big key：大key是value过大，读写、加载易超时的现象，重新加载，频繁访问这种大key都对系统性能有考验。解决方案推荐对超长内容进行再次压缩，对大key分配足够控件</p>
+<h3 id="Mc的原理及特性"><a href="#Mc的原理及特性" class="headerlink" title="Mc的原理及特性"></a>Mc的原理及特性</h3><p>Memcached是一个高性能的额分布式内存对象缓存系统，用于动态web应用以减轻数据库的负载。其守护进程使用C写的，但是任何语言的客户端都能用。<br>数据存储形态：key/value<br>类型：内存型缓存组件，重启会丢失<br>特性：</p>
 <ul>
-<li>一些配置比较稳定，不怎么更改，适合在配置文件中随项目一起发布</li>
-<li>一些配置变更频繁，适合使用配置中心修改（一般是用发布订阅模式） 常用配置中心选型<ul>
-<li>Apollo 携程的开源分布式配置中心，基于spring boot&amp;cloud</li>
-<li>disconf 百度，基于zookeeper的watch机制</li>
-<li>nacos 支持服务发现和配置管理功能<h2 id="Dubbo-SpringCloud"><a href="#Dubbo-SpringCloud" class="headerlink" title="Dubbo+SpringCloud"></a>Dubbo+SpringCloud</h2></li>
+<li>高性能，单节点压测性能达到百万级QPS，这点比Redis要强一点点</li>
+<li>协议简单，存储结构简单</li>
+<li>节点之间没有通信，client自行负责管理数据分布</li>
 </ul>
-</li>
-</ul>
-<p>1.dubbo强依赖于zookeeper注册中心，如果还想要实现服务治理的周边功能<em>比如配置中心/服务跟踪</em>,就需要集成其他的组件支持</p>
+<h3 id="Redis的原理及特性"><a href="#Redis的原理及特性" class="headerlink" title="Redis的原理及特性"></a>Redis的原理及特性</h3><p>基于Ansi C语言编写的日志型key-value存储组件，Remote dictionary server<br>特性：</p>
 <ul>
-<li>功能对比<br>  <strong>注册中心</strong>:依赖zookeeper<br>  <strong>分布式配置</strong>:可以使用diamond或者淘宝的开源组件xconfig<br>  <strong>分布式调用跟踪</strong>:应用扩展Filter用Zippin来做服务跟踪<br>  <strong>限流降级</strong>：可以使用开源的Sentinel组件，或者自定义Filter实现</li>
-<li>调用方式<br>  <strong>Dubbo</strong>使用RPC协议通讯，性能更高<br>  <strong>SpringCloud</strong>使用http协议的RESTful API调用，可以更好的解耦</li>
-<li>开发成本<br>  dubbo的自定义功能需要实现各种Filter进行定制，相比之下SpringCloud有很多开源的实现，开发更方便<br>简单来说，两者的咪表不同，dubbo看重的是远程服务调用，SpringCloud更加侧重的是微服务生态，覆盖更多的场景</li>
+<li>redis支持8种核心数据类型，单线程压测10w-11w</li>
+<li>提供两种持久化方式，快照方式（将某时某刻的虽有数据都写入硬盘RDB文件）、追加文件方式（将所有的写命令以追加的方式写入硬盘AOP文件）</li>
 </ul>
-<p>2.SpringCloudAlibaba是SpringCloud整合了阿里巴巴的<br>  开源组件如Sentinel(流量控制，熔断降级)/Nacos/RocketMQ/Seata(分布式事务解决方案)<br>  平台服务：阿里云OSS云对象存储服务/SchedulerX分布式任务调度/SMS覆盖全球的短信服务</p>
-<h2 id="Dubbo源码"><a href="#Dubbo源码" class="headerlink" title="Dubbo源码"></a>Dubbo源码</h2><p>1.Dubbo源码核心模块<br>  common(公共逻辑)/remoting(远程通信)/rpc(远程调用协议)/cluster(集群管理)/registry(注册中心交互)/moniter(监控)/config(配置规则解析)/metadata(元数据)/configcenter(动态配置)<br>2.Dubbo的配置总线(URL):protpcpl://username:password@host:port+/path?key=value&amp;key=value,这个URL中包含很多信息包名类名方法参数啥的<br>3.Dubbo使用SPI机制加载插件：针对厂商/框架/开发人员或者插件使用的一种技术<br>  首先要了解什么是OCP，“对扩展开放，对修改封闭”，Dubbo采用了微内核+插件的架构，当某个接口被@SPI修饰的额时候，这个接口就试扩展接口，注解的value指定扩展名，扩展名和扩展实现组成SPI的KV对<br>  <strong>Dubbo SPI解决了JAVA SPI的资源浪费的问题，还对SPI配置文件扩展和修改</strong><br>4.netty协议采用Reactor线程模型设计，是面向缓冲区的异步IO流。Reactor模式也被称为Dispatcher模式，核心原理是Seletor负责监听IO事件，在监听到IO事件之后，分发给相关线程进行处理</p>
+<p>redis相较MC的优点：</p>
 <ul>
-<li>Chnnel组件时Netty对网络连接的抽象，核心功能时执行网络IO操作，不同阻塞类型的连接对应不同的Chnnel</li>
-<li>Selector是Netty对多路复用器的抽象，selector内部会不断查询注册的channel是否有已经就绪的IO事件</li>
-<li>NioEventLoop表示一个不断循环，执行处理任务的线程驱动，三件事，监听IO事件（读写事件/网络连接事件）/执行普通任务/执行定时任务</li>
-<li>ByteBuf是数据容器，发送端和接收端都需要这个高效的数据容器存储字节，分为Unpooled和pooled两种</li>
+<li>数据结构多</li>
+<li>持久化</li>
+<li>集群，redis在高可用，主从，冗余，failover等方面都有所考虑，集群设计相对复杂</li>
 </ul>
-<p>5.Registry接口</p>
-<ul>
-<li>node接口抽象节点的概念，可以表示服务节点，消费节点，还能表示注册中心节点</li>
-<li>RegistryService接口抽象了注册服务的基本行为，注册取消注册，订阅取消订阅</li>
-<li>Registry接口继承上面两个接口，表示的是一个由注册中心能力的节点，<strong>Registry是应用本地注册中心的客户端，真正的注册中心是独立部署的（比如zookeeper）</strong></li>
-<li>RegistryFactory接口是Registry的工厂接口，负责创建Registry对象</li>
-<li>AbstractRegistry抽象类实现了Registry接口，所有的Registry接口实现类都继承了这个抽象类<ul>
-<li>本地缓存，缓存当前节点订阅的URL信息</li>
-<li>注册、订阅</li>
-<li>回复、销毁，针对provider</li>
+<h3 id="缓存设计"><a href="#缓存设计" class="headerlink" title="缓存设计"></a>缓存设计</h3><ul>
+<li>负载均衡：增加节点分担压力</li>
+<li>分片：划分内容到不同的节点分担压力</li>
+<li>数据冗余：一个节点的数据挂掉，其它节点的数据是否可以直接备份</li>
+<li>fail-over：人和街店挂掉，集群的职责是否可以重新分配</li>
+<li>一致性保证：保证数据库和缓存的数据一致，这点单靠redis是做不到的</li>
+<li>缓存监控工具：redislive、redis-monitor</li>
 </ul>
-</li>
-</ul>
-<p>6.FailbackRegistry：覆盖AbstractRegistry的五个核心方法，为了保证服务的可靠性，真实系统中的重试机制是必不可少的。请求失败的时候，客户端会重新发起一个一模一样的请求，尝试调用相同或不同的服务端，万层相应的业务操作，Dubbo将这个功能放到了AbstractRegistry的子类中</p>
-<p>7.dubbo对zookeeper的支持，<strong>这里能看出来是真爱了，专门给人家整了俩包</strong><br>dubbo-remoting-zookeeper模块有两个对象</p>
-<ul>
-<li>ZookeeperTransporter：创建zookeeperClient对象</li>
-<li>ZookeeperClient：dubbo疯转的客户端，有大量用来交互的方法<br>dubbo-registry-zookeeper模块还会连接一个状态监听器，会根据连接状态重新注册、订阅，防止数据丢失</li>
-</ul>
+<h3 id="redis使用案例"><a href="#redis使用案例" class="headerlink" title="redis使用案例"></a>redis使用案例</h3><p><a target="_blank" rel="noopener" href="https://www.yuque.com/docs/share/8c5c4d4f-50e0-46b6-971d-ca8506d68ac3">redis基本操作</a><br><a target="_blank" rel="noopener" href="https://www.yuque.com/docs/share/61f09161-0faf-4336-a915-72267d1de1f1">redis共享session</a></p>
 
       
     </div>
@@ -466,11 +469,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E7%9F%A5%E8%AF%86/" rel="tag"># 知识</a>
-          
             <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"># 分布式</a>
           
-            <a href="/tags/dubbo/" rel="tag"># dubbo</a>
+            <a href="/tags/%E7%BC%93%E5%AD%98/" rel="tag"># 缓存</a>
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -483,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/25/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="next" title="区块链">
-                <i class="fa fa-chevron-left"></i> 区块链
+              <a href="/2021/01/27/0127note/" rel="next" title="0127note">
+                <i class="fa fa-chevron-left"></i> 0127note
               </a>
             
           </div>
@@ -492,10 +495,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/01/27/0127note/" rel="prev" title="0127note">
-                0127note <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -653,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">服务调用（上）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%B5%85%E8%B0%88"><span class="nav-number">1.1.</span> <span class="nav-text">分布式服务浅谈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo-SpringCloud"><span class="nav-number">1.2.</span> <span class="nav-text">Dubbo+SpringCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo%E6%BA%90%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">Dubbo源码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%EF%BC%9A%E7%BC%93%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">分布式技术：缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.</span> <span class="nav-text">浅谈分布式缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E5%8E%9F%E7%90%86%E3%80%81%E5%BC%95%E5%85%A5%E5%92%8C%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.1.</span> <span class="nav-text">缓存的原理、引入和设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E5%A4%A7%E7%BC%93%E5%AD%98%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">七大缓存经典问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mc%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.3.</span> <span class="nav-text">Mc的原理及特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.4.</span> <span class="nav-text">Redis的原理及特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.5.</span> <span class="nav-text">缓存设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">1.1.6.</span> <span class="nav-text">redis使用案例</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
