@@ -86,15 +86,15 @@
 
 
 
-<meta name="description" content="分布式技术：计算引擎一、大数据导读二、大数据生态三、Flink基础四、流计算与消息">
+<meta name="description" content="写在前面：在阿里的一个月学习已经接近尾声了，这段时间收获更多的可能是比较抽象的一些东西吧，每天接触到的人，看到的大家的工作状态，授课接收的知识，对我来说都是对一个全新世界的接触，正所谓师父领进门修行在个人，接下来的实习，啊好像还有师兄带，好好看，好好学。学习新知识的5-20-2法则：5分钟了解特点、应用场景、能解决什么问题；20分钟理解设计原理、核心思想和思路；2小时练习，写个demo 分布式技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0204note">
 <meta property="og:url" content="https://gwing77.github.io.git/2021/02/04/0204note/index.html">
 <meta property="og:site_name" content="iidmx">
-<meta property="og:description" content="分布式技术：计算引擎一、大数据导读二、大数据生态三、Flink基础四、流计算与消息">
+<meta property="og:description" content="写在前面：在阿里的一个月学习已经接近尾声了，这段时间收获更多的可能是比较抽象的一些东西吧，每天接触到的人，看到的大家的工作状态，授课接收的知识，对我来说都是对一个全新世界的接触，正所谓师父领进门修行在个人，接下来的实习，啊好像还有师兄带，好好看，好好学。学习新知识的5-20-2法则：5分钟了解特点、应用场景、能解决什么问题；20分钟理解设计原理、核心思想和思路；2小时练习，写个demo 分布式技术">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-02-04T13:32:27.000Z">
-<meta property="article:modified_time" content="2021-02-04T13:36:36.059Z">
+<meta property="article:modified_time" content="2021-02-05T13:34:51.892Z">
 <meta property="article:author" content="jiayi.li">
 <meta property="article:tag" content="分布式计算">
 <meta property="article:tag" content="大数据">
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  32
+                  2.2k
                 </span>
               
 
@@ -365,7 +365,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  7
                 </span>
               
             </div>
@@ -386,7 +386,149 @@
       
 
       
-        <h1 id="分布式技术：计算引擎"><a href="#分布式技术：计算引擎" class="headerlink" title="分布式技术：计算引擎"></a>分布式技术：计算引擎</h1><h2 id="一、大数据导读"><a href="#一、大数据导读" class="headerlink" title="一、大数据导读"></a>一、大数据导读</h2><h2 id="二、大数据生态"><a href="#二、大数据生态" class="headerlink" title="二、大数据生态"></a>二、大数据生态</h2><h2 id="三、Flink基础"><a href="#三、Flink基础" class="headerlink" title="三、Flink基础"></a>三、Flink基础</h2><h2 id="四、流计算与消息"><a href="#四、流计算与消息" class="headerlink" title="四、流计算与消息"></a>四、流计算与消息</h2>
+        <p>写在前面：在阿里的一个月学习已经接近尾声了，这段时间收获更多的可能是比较抽象的一些东西吧，每天接触到的人，看到的大家的工作状态，授课接收的知识，对我来说都是对一个全新世界的接触，正所谓师父领进门修行在个人，接下来的实习，啊好像还有师兄带，好好看，好好学。<br>学习新知识的5-20-2法则：5分钟了解特点、应用场景、能解决什么问题；20分钟理解设计原理、核心思想和思路；2小时练习，写个demo</p>
+<h1 id="分布式技术：计算引擎"><a href="#分布式技术：计算引擎" class="headerlink" title="分布式技术：计算引擎"></a>分布式技术：计算引擎</h1><h2 id="一、大数据导读"><a href="#一、大数据导读" class="headerlink" title="一、大数据导读"></a>一、大数据导读</h2><p><strong>了解Doug Cutting</strong>，在家里设计了第一个提供全文文本搜索的开源数据库Lucene，目的是为了搜搜菜谱，后来演变成Hadoop。<br>从hadoop成功学到经验</p>
+<ol>
+<li>代码开源：社群的力量让它成为最好的搜索技术</li>
+<li>“数字转型”需要不同的运算和储存架构，数字转型指ETL数据提取转换和加载</li>
+<li>hadoop与机器学习、AI有高度关联性，训练，测试，评价人工智能都需要数据，可以用这个平台搜集各种巨量数据</li>
+</ol>
+<p><strong>了解数据从日志开始</strong></p>
+<ul>
+<li>日志是什么？<ol>
+<li>数据库中的日志是立即持久化的，发生崩溃时用于恢复其它持久化结构</li>
+<li>分布式系统中的日志解决了两个问题：更改动作的排序和数据的并发</li>
+<li>变更日志101：表和事件的二象性，表支持了静态数据，日志记录了变更</li>
+</ol>
+<ul>
+<li>数据集成，让组织中所有存储和处理系统可以容易地访问组织所有的数据<ol>
+<li>事件数据的爆发：增长事件的数据，往往比传统数据库应用大好几个数量及</li>
+<li>数据系统的爆发：专门用于OLAP（联机分析处理）、搜索、简单在线存储、批处理、图像分析等的数据系统开始流行，并可以免费获得</li>
+</ol>
+</li>
+<li>流处理，持续数据流处理的基础设施<ol>
+<li>处理模型的真正驱动力是数据收集方法，当数据是持续收集的，自然也应该持续不断的处理。</li>
+</ol>
+</li>
+<li>系统构建：数据基础结构不是打包套餐而是分解单品成一组服务及面向应用的API</li>
+<li>日志能做什么？<ul>
+<li>通过对节点并发更新的排序处理，处理数据的一致性</li>
+<li>提供节点之间的数据复制</li>
+<li>为写入者提供commit语义，确保写入不会丢失时才会收到完成确认</li>
+<li>为系统提供外部的数据订阅</li>
+<li>对于丢失数据的失败了的副本，提供恢复或是重新启动一个新的副本的能力</li>
+<li>调整节点之间的数据平衡</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、大数据生态"><a href="#二、大数据生态" class="headerlink" title="二、大数据生态"></a>二、大数据生态</h2><h3 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h3><p>Hadoop主要由三部分组成，<strong>集中管理，分布存储与计算</strong></p>
+<ul>
+<li>分布式文件系统 HDFS：分布式文件存储是分布式计算的基础，也可见分布式文件存储的重要性<ul>
+<li>文件数据以数据块的方式进行拆分</li>
+<li>MapReduce对输入数据进行分片读取，可以启用多个进程对多个数据块进行并发访问</li>
+<li>DataNode存储的数据块会进行复制，每隔数据块存在多个备份，保证可靠性</li>
+</ul>
+</li>
+<li>分布式计算框架 MapReduce：开发人员必须基于MapReduce编程模型进行编程开发，然后将计算框架分发到Hadoop集群中运行<ul>
+<li>需要做的事情是编写一个map函数和一个reduce函数，函数是如何分布启动到集群上，也不用关心数据块是如何分配给计算任务的</li>
+<li>mapreduce只能处理可分割的任务，大数据场景几乎都是可以分片计算的</li>
+</ul>
+</li>
+<li>分布式集群资源调度框架 Yarn：<ul>
+<li>Hadoop早期服务器集群调度和mapreduce执行过程耦合在一起，后来出现了很多大数据框架，yarn被分离出来</li>
+<li>大数据框架都要遵守yarn规范的applicationMaster，这样一个集群中就可以同时并发执行不同的大数据计算框架</li>
+</ul>
+</li>
+</ul>
+<h3 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h3><p>在数据仓库中，sql是最常用的分析工具，sql可以通过MapReduce实现，Hive能把SQL转化成MapReduce能执行的代码</p>
+<h3 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h3><p>Spark比MapReduce的计算速度快100多倍。<br>MapReduce是面向过程的大数据计算，spark是面向对象的大数据计算。spark是针对数据进行编程，将大数据几何抽象成一个RDD对象，然后在RDD上进行计算处理</p>
+<h2 id="Hbase"><a href="#Hbase" class="headerlink" title="Hbase"></a>Hbase</h2><p>Hbase是GoogleBigTable的开源实现，是完整继承了BigTable的优良设计的nosql系统</p>
+<ul>
+<li>架构上通过数据分片的设计配合HDFS，实现了数据的分布式海量存储</li>
+<li>数据结构上通过列族设计，实现了数据表结构可以在运行期定义</li>
+<li>存储上使用LSM树（Log-Structured Merge-Tree），使数据可以通过连续写磁盘的方式保存数据，提高数据写入性能<br>Hbase的海量数据处理能力，根本在于和传统关系型数据库设计的不同思路，nosql数据库认为，业务逻辑就应该由程序去处理，<strong>简单暴力也是一种美</strong></li>
+</ul>
+<h3 id="Storm、Spark-Streaming、Flink"><a href="#Storm、Spark-Streaming、Flink" class="headerlink" title="Storm、Spark Streaming、Flink"></a>Storm、Spark Streaming、Flink</h3><p>前面介绍的大数据技术主要是处理、计算介质上的大规模数据，这类计算也叫作大数据批处理计算，这类计算一般使用mapreduce或spark这样的计算框架，一般完成一次计算要几分钟到几小时<br>还有一种大数据处理技术是针对实时产生的大规模数据进行即时计算处理，数据不是存储在HDFS上，而是实时传输过来的，成为大数据流计算系统</p>
+<h4 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h4><p>大数据引擎发展的几个阶段</p>
+<ul>
+<li>海粮油节数据 Apache Hadoop</li>
+<li>海量无界数据 Apache Storm<br>前两个时期一般用户会维护两套系统，批处理要求低的有限数据集，流系统处理延迟要求较高的实时数据</li>
+<li>一套系统处理有节无界数据：Apache Spark，批处理系统，micro-batch方式处理无界数据</li>
+<li>Flink的出现：spark在许多低延迟的场景下还是无法胜任，flink是一个以流为核心的批流一体计算引擎，高吞吐，低延迟</li>
+</ul>
+<h3 id="大数据技术分类"><a href="#大数据技术分类" class="headerlink" title="大数据技术分类"></a>大数据技术分类</h3><ul>
+<li>存储：文件存储HDFS、列存储Hbase（Hbase底层存储也用到了HDFS）</li>
+<li>计算：批计算MapReduce、Spark；流计算Spark Streaming、Storm、Flink；数据仓库Hive、Spark SQL、Flink SQL</li>
+<li>资源管理：Yarn<br>MapReduce、Spark、Hive、Spark SQL主要用来解决离线大数据的计算，批处理计算<br>Storm、Flink、Spark Streaming针对实时数据进行计算，流处理大数据计算</li>
+</ul>
+<h3 id="数据仓库"><a href="#数据仓库" class="headerlink" title="数据仓库"></a>数据仓库</h3><p>数据仓库是一个面向主题的、集成的、非易失的且随时间变化的数据集合，用来支持管理人员的决策。</p>
+<ul>
+<li>离线数仓：存放数据的仓库，偏分析(Hive)，结果不及时(t+N)</li>
+<li>实时数仓：存放数据的仓库，偏分析（Flink），结果不及时（T+0）</li>
+</ul>
+<h2 id="三、Flink基础"><a href="#三、Flink基础" class="headerlink" title="三、Flink基础"></a>三、Flink基础</h2><h3 id="Flink架构模型"><a href="#Flink架构模型" class="headerlink" title="Flink架构模型"></a>Flink架构模型</h3><ul>
+<li>Flink分层：SQL—Table Api（前面这两个是更高级的API操作，用于降低用户使用实时计算的门槛）—DataStream、DataSet Api（开发者主要针对core Api编程）—Stateful Stream Processing</li>
+<li>Flink的数据流模型（Streams与Transformations）<ol>
+<li>每一个数据流起始于一个或多个Source</li>
+<li>经过Transformation转换部分Map、Keyby、TimeWindow等算子进行逻辑运算，经常会包含多个转换算子</li>
+<li>最后，经过计算的数据会被写入到我们执行的文件中，这便是我们的Sink部分</li>
+</ol>
+</li>
+<li>Flink核心概念<strong>窗口</strong>和<strong>时间</strong><ol>
+<li>对数据流上的聚合需要由窗口来划定范围</li>
+<li>Flink支持多种窗口模型比如滚动窗口，滑动窗口和会话窗口</li>
+<li>支持实践实践、摄取时间和处理时间三种时间语义</li>
+</ol>
+</li>
+<li>Flink开发环境：Flink是以Java和Scala作为开发语言的开源大数据项目    </li>
+</ul>
+<h3 id="Flink与其他框架比较"><a href="#Flink与其他框架比较" class="headerlink" title="Flink与其他框架比较"></a>Flink与其他框架比较</h3><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>Spark</th>
+<th>Flink</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>性能对比</td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>流式计算比较</td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>与Hadoop兼容性</td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>SQL支持对比</td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>计算迭代对比</td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>社区支持对比</td>
+<td>打平</td>
+<td>打平</td>
+</tr>
+</tbody></table>
+<h3 id="Flink应用场景"><a href="#Flink应用场景" class="headerlink" title="Flink应用场景"></a>Flink应用场景</h3><ul>
+<li>实时数据计算</li>
+<li>实时数据仓库和ETL</li>
+<li>事件驱动型应用</li>
+</ul>
+
       
     </div>
     
@@ -584,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%EF%BC%9A%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E"><span class="nav-number">1.</span> <span class="nav-text">分布式技术：计算引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AF%BC%E8%AF%BB"><span class="nav-number">1.1.</span> <span class="nav-text">一、大数据导读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%94%9F%E6%80%81"><span class="nav-number">1.2.</span> <span class="nav-text">二、大数据生态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Flink%E5%9F%BA%E7%A1%80"><span class="nav-number">1.3.</span> <span class="nav-text">三、Flink基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B6%88%E6%81%AF"><span class="nav-number">1.4.</span> <span class="nav-text">四、流计算与消息</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%EF%BC%9A%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E"><span class="nav-number">1.</span> <span class="nav-text">分布式技术：计算引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AF%BC%E8%AF%BB"><span class="nav-number">1.1.</span> <span class="nav-text">一、大数据导读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%94%9F%E6%80%81"><span class="nav-number">1.2.</span> <span class="nav-text">二、大数据生态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hadoop"><span class="nav-number">1.2.1.</span> <span class="nav-text">Hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive"><span class="nav-number">1.2.2.</span> <span class="nav-text">Hive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark"><span class="nav-number">1.2.3.</span> <span class="nav-text">Spark</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hbase"><span class="nav-number">1.3.</span> <span class="nav-text">Hbase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Storm%E3%80%81Spark-Streaming%E3%80%81Flink"><span class="nav-number">1.3.1.</span> <span class="nav-text">Storm、Spark Streaming、Flink</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Flink"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Flink</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.2.</span> <span class="nav-text">大数据技术分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.3.3.</span> <span class="nav-text">数据仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Flink%E5%9F%BA%E7%A1%80"><span class="nav-number">1.4.</span> <span class="nav-text">三、Flink基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flink%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">Flink架构模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flink%E4%B8%8E%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E6%AF%94%E8%BE%83"><span class="nav-number">1.4.2.</span> <span class="nav-text">Flink与其他框架比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flink%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">Flink应用场景</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -618,7 +760,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">12.6k</span>
+    <span title="Site words total count">14.7k</span>
   
 </div>
 

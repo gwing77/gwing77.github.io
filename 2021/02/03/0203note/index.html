@@ -94,8 +94,11 @@
 <meta property="og:description" content="分布式存储读写分离再业务中的落地互联网行业大部分业务都是读多写少的，为了不让数据库的读取工作成为业务瓶颈，保证写库的成功率，一般会采取读写分离的技术。  主数据库增删改 从数据库处理查询语句  把访问压力转移到从库，与此同时，对数据库也提出了一些要求，数据一致性，确保不同的操作指向不同的库。 方案1：应用层解决优点：数据源切换方便，可以由程序自动完成；不需要引入中间件；理论上可以支持任何数据库缺点">
 <meta property="og:locale">
 <meta property="og:image" content="https://gwing77.github.io.git/images/snowflake.png">
+<meta property="og:image" content="https://gwing77.github.io.git/images/sharding-jdbc.png">
+<meta property="og:image" content="https://gwing77.github.io.git/images/sharding-proxy.png">
+<meta property="og:image" content="https://gwing77.github.io.git/images/sharding-sideCar.png">
 <meta property="article:published_time" content="2021-02-03T13:44:51.000Z">
-<meta property="article:modified_time" content="2021-02-04T13:28:03.262Z">
+<meta property="article:modified_time" content="2021-02-05T13:37:29.314Z">
 <meta property="article:author" content="jiayi.li">
 <meta property="article:tag" content="分布式存储">
 <meta name="twitter:card" content="summary">
@@ -465,12 +468,12 @@
 </ul>
 <h1 id="shardingSphere"><a href="#shardingSphere" class="headerlink" title="shardingSphere"></a>shardingSphere</h1><h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p><strong>shardingSphere是一种关系型数据库中间件</strong></p>
 <ul>
-<li>sharding-JDBC，是shardingSphere的前身，轻量级java框架，再JDBC层提供扩展性服务，对外暴露的接口和JDBC规范中提供的接口完全一致,jar包形式提供服务，直接连接数据库，无需额外的部署和依赖管理<br>！<a href="/images/sharding-jdbc.png">jdbc</a></li>
-<li>sharding-proxy，透明化的数据库代理端，提供封装了二进制协议的服务端版本，支持异构语言，可以像使用一个简单的数据库一样来操作分库分表的数据<br>！<a href="/images/sharding-proxy.png">proxy</a> </li>
+<li>sharding-JDBC，是shardingSphere的前身，轻量级java框架，再JDBC层提供扩展性服务，对外暴露的接口和JDBC规范中提供的接口完全一致,jar包形式提供服务，直接连接数据库，无需额外的部署和依赖管理<br><img src="/images/sharding-jdbc.png" alt="jdbc"></li>
+<li>sharding-proxy，透明化的数据库代理端，提供封装了二进制协议的服务端版本，支持异构语言，可以像使用一个简单的数据库一样来操作分库分表的数据<br><img src="/images/sharding-proxy.png" alt="proxy"> </li>
 </ul>
 <p><strong>对比前两者的不同</strong>：可以被混在一起使用，sharding-jdbc实在应用程序中直接嵌入jar包，适用于业务开发人员；sharding-proxy提供静态入口和异构语言支持，适合对分片数据库管理的中间件开发和运维人员</p>
 <ul>
-<li>sharding-sideCar，目标是把系统中各种异构的服务组件串联起来，并进行高效的服务治理<br>！<a href="/images/sharding-sideCar.png">sideCar</a> </li>
+<li>sharding-sideCar，目标是把系统中各种异构的服务组件串联起来，并进行高效的服务治理<br><img src="/images/sharding-sideCar.png" alt="sideCar"> </li>
 </ul>
 <h2 id="四大核心功能"><a href="#四大核心功能" class="headerlink" title="四大核心功能"></a>四大核心功能</h2><ol>
 <li>基础设施<ul>
@@ -733,7 +736,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">12.6k</span>
+    <span title="Site words total count">14.7k</span>
   
 </div>
 
