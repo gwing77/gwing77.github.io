@@ -94,7 +94,7 @@
 <meta property="og:description" content="说说最近来到斑马已经一个月了，最近师兄带着做了一个简单的网关，是基于dubbo泛化调用的，整体还是学了很多阿里的规范和框架，收获挺多，就是将来回到大众，可能也没有太多并发:）,但是学习嘛，总归是有用处的。印象就是上海的程序员感觉生活节奏要比杭州慢一些，毕竟我们60个人可是出了名的能熬，比他们走的都晚。 ES6ES6这个词最近看到很多次了，就知道箭头函数，知道一些新的框架都是ES6规范的，IE对ES">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-03-18T06:44:37.000Z">
-<meta property="article:modified_time" content="2021-03-20T09:40:18.746Z">
+<meta property="article:modified_time" content="2021-03-28T15:22:58.555Z">
 <meta property="article:author" content="jiayi.li">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="ES6">
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.6k
+                  2.7k
                 </span>
               
 
@@ -387,7 +387,7 @@
 
       
         <h2 id="说说最近"><a href="#说说最近" class="headerlink" title="说说最近"></a>说说最近</h2><p>来到斑马已经一个月了，最近师兄带着做了一个简单的网关，是基于dubbo泛化调用的，整体还是学了很多阿里的规范和框架，收获挺多，就是将来回到大众，可能也没有太多并发:）,但是学习嘛，总归是有用处的。印象就是上海的程序员感觉生活节奏要比杭州慢一些，毕竟我们60个人可是出了名的能熬，比他们走的都晚。</p>
-<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><p>ES6这个词最近看到很多次了，就知道箭头函数，知道一些新的框架都是ES6规范的，IE对ES6的支持不算友好。因为看了vue，之后再看element的UI组件，发现效果跑不出来，组件的js代码也看不太明白，所以决定还是学学ES6。<br>看的视频时尚硅谷的，因为时一台电脑打字一台电脑放视频，就不挂链接了~</p>
+<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><p>ES6这个词最近看到很多次了，就知道箭头函数，知道一些新的框架都是ES6规范的，IE对ES6的支持不算友好。因为看了vue，之后再看element的UI组件，发现效果跑不出来，组件的js代码也看不太明白，所以决定还是学学ES6。<br>看的视频时尚硅谷的，因为是一台电脑打字一台电脑放视频，就不挂链接了~</p>
 <h4 id="let声明变量"><a href="#let声明变量" class="headerlink" title="let声明变量"></a>let声明变量</h4><ol>
 <li>let变量不能重复声明</li>
 <li>let变量作用域,在for循环中可以使用</li>
@@ -400,8 +400,8 @@
 <li>常量如果为数组或者对象，可以修改里面的元素或者属性，不算修改常量</li>
 </ol>
 <h4 id="变量解构赋值，从数组和对象里面提取值"><a href="#变量解构赋值，从数组和对象里面提取值" class="headerlink" title="变量解构赋值，从数组和对象里面提取值"></a>变量解构赋值，从数组和对象里面提取值</h4><ol>
-<li>数组结构</li>
-<li>对象解构<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zhao = &#123;</span><br><span class="line">    name:<span class="string">&#x27;赵本山&#x27;</span>,</span><br><span class="line">    age:<span class="number">18</span>,</span><br><span class="line">    xiaopin: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;act&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123;xiaopin&#125; = zhao;</span><br><span class="line">xiaopin();</span><br></pre></td></tr></table></figure>
+<li>数组解构</li>
+<li>对象解构<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zhao = &#123;</span><br><span class="line">    name:<span class="string">&#x27;赵本山&#x27;</span>,</span><br><span class="line">    age:<span class="number">18</span>,</span><br><span class="line">    xiaopin: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;act&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123;xiaopin&#125; = zhao;</span><br><span class="line">xiaopin();</span><br><span class="line"><span class="comment">//还可以加别名</span></span><br><span class="line"><span class="keyword">let</span> &#123;<span class="attr">xiaopin</span> : act&#125; = zhao;</span><br><span class="line">act();</span><br></pre></td></tr></table></figure>
 <h4 id="模板字符串-反引号特点"><a href="#模板字符串-反引号特点" class="headerlink" title="模板字符串:反引号特点"></a>模板字符串:反引号特点</h4></li>
 <li>内容中可以出现换行(回车空格啥的)</li>
 <li>可以进行变量拼接<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str =<span class="string">`我是一个字符串`</span></span><br><span class="line"><span class="keyword">let</span> out = <span class="string">`<span class="subst">$&#123;str&#125;</span>asdasdadsad`</span></span><br><span class="line"><span class="built_in">console</span>.log(out);</span><br></pre></td></tr></table></figure>
@@ -486,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/18/0328note-2/" rel="next" title="0318note">
-                <i class="fa fa-chevron-left"></i> 0318note
+              <a href="/2021/02/04/0204note/" rel="next" title="0204note">
+                <i class="fa fa-chevron-left"></i> 0204note
               </a>
             
           </div>
