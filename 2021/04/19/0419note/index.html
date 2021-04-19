@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="知识,分布式,dubbo," />
+  <meta name="keywords" content="前端,nodejs," />
 
 
 
@@ -86,19 +86,18 @@
 
 
 
-<meta name="description" content="服务调用（上）Nacos可以在AP和CP模式之间切换，是中国人的中庸思想中国人设计东西就是很有意思，有的时候就受一些儒家传统文化影响，有的时候就很浪漫主义，想起来前一阵看到嫦娥带回月壤，作为容灾机制，一部分月壤存放在了毛主席故乡，因为当年主席说过可上九天揽月，这回终于实现了 分布式服务浅谈1.理解RPC：程序调用另一个空间地址的过程或是函数的过程，不用程序员显示编码这个远程调用的细节2.RPC发展">
+<meta name="description" content="初见nodejs之前对nodejs的理解就是为了敲npm包管理的命令行，现在知道nodejs是js的运行时环境，可以用来开发web服务器后台，前端工程师接触命令行工具比较多，像webpack，npm都是基于nodejs开发的，为了学习midway，先来补一补node的基础知识。nodejs只是BS编程的工具 nodejs - JavaScript运行时 node执行js脚本文件:可以直接在控制台查">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0126note">
-<meta property="og:url" content="https://gwing77.github.io.git/2021/01/26/0126note/index.html">
+<meta property="og:title" content="0419note">
+<meta property="og:url" content="https://gwing77.github.io.git/2021/04/19/0419note/index.html">
 <meta property="og:site_name" content="iidmx">
-<meta property="og:description" content="服务调用（上）Nacos可以在AP和CP模式之间切换，是中国人的中庸思想中国人设计东西就是很有意思，有的时候就受一些儒家传统文化影响，有的时候就很浪漫主义，想起来前一阵看到嫦娥带回月壤，作为容灾机制，一部分月壤存放在了毛主席故乡，因为当年主席说过可上九天揽月，这回终于实现了 分布式服务浅谈1.理解RPC：程序调用另一个空间地址的过程或是函数的过程，不用程序员显示编码这个远程调用的细节2.RPC发展">
+<meta property="og:description" content="初见nodejs之前对nodejs的理解就是为了敲npm包管理的命令行，现在知道nodejs是js的运行时环境，可以用来开发web服务器后台，前端工程师接触命令行工具比较多，像webpack，npm都是基于nodejs开发的，为了学习midway，先来补一补node的基础知识。nodejs只是BS编程的工具 nodejs - JavaScript运行时 node执行js脚本文件:可以直接在控制台查">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-01-26T11:23:34.000Z">
-<meta property="article:modified_time" content="2021-01-27T11:34:46.585Z">
+<meta property="article:published_time" content="2021-04-19T01:12:40.000Z">
+<meta property="article:modified_time" content="2021-04-19T09:37:00.277Z">
 <meta property="article:author" content="jiayi.li">
-<meta property="article:tag" content="知识">
-<meta property="article:tag" content="分布式">
-<meta property="article:tag" content="dubbo">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="nodejs">
 <meta name="twitter:card" content="summary">
 
 
@@ -129,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://gwing77.github.io.git/2021/01/26/0126note/"/>
+  <link rel="canonical" href="https://gwing77.github.io.git/2021/04/19/0419note/"/>
 
 
 
 
 
-  <title>0126note | iidmx</title>
+  <title>0419note | iidmx</title>
   
 
 
@@ -262,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gwing77.github.io.git/2021/01/26/0126note/">
+    <link itemprop="mainEntityOfPage" href="https://gwing77.github.io.git/2021/04/19/0419note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -279,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">0126note</h1>
+          <h1 class="post-title" itemprop="name headline">0419note</h1>
         
 
         <div class="post-meta">
@@ -291,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-26T19:23:34+08:00">
-                2021-01-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-19T09:12:40+08:00">
+                2021-04-19
               </time>
             
 
@@ -350,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  706
                 </span>
               
 
@@ -366,7 +365,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  2
                 </span>
               
             </div>
@@ -387,67 +386,21 @@
       
 
       
-        <h1 id="服务调用（上）"><a href="#服务调用（上）" class="headerlink" title="服务调用（上）"></a>服务调用（上）</h1><p>Nacos可以在AP和CP模式之间切换，是中国人的中庸思想<br><strong>中国人设计东西就是很有意思，有的时候就受一些儒家传统文化影响，有的时候就很浪漫主义，想起来前一阵看到嫦娥带回月壤，作为容灾机制，一部分月壤存放在了毛主席故乡，因为当年主席说过可上九天揽月，这回终于实现了</strong></p>
-<h2 id="分布式服务浅谈"><a href="#分布式服务浅谈" class="headerlink" title="分布式服务浅谈"></a>分布式服务浅谈</h2><p>1.理解RPC：程序调用另一个空间地址的过程或是函数的过程，不用程序员显示编码这个远程调用的细节<br>2.RPC发展的四个阶段</p>
+        <h2 id="初见nodejs"><a href="#初见nodejs" class="headerlink" title="初见nodejs"></a>初见nodejs</h2><p>之前对nodejs的理解就是为了敲npm包管理的命令行，现在知道nodejs是js的运行时环境，可以用来开发web服务器后台，前端工程师接触命令行工具比较多，像webpack，npm都是基于nodejs开发的，为了学习midway，先来补一补node的基础知识。<br>nodejs只是BS编程的工具</p>
+<h2 id="nodejs-JavaScript运行时"><a href="#nodejs-JavaScript运行时" class="headerlink" title="nodejs - JavaScript运行时"></a>nodejs - JavaScript运行时</h2><ul>
+<li>node执行js脚本文件:可以直接在控制台查看结果，注意文件名不要起node.js<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node ./xxx.js</span><br></pre></td></tr></table></figure></li>
+<li>node读取文件:注意在node中没有window和document，和浏览器中的js不同，但是node中可以读写文件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fs=fileSystem,提供了所有的文件操作相关的API</span></span><br><span class="line"><span class="comment">// fs.readFile是读取文件的方法</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// import * as fs from &quot;fs&quot;;</span></span><br><span class="line"><span class="comment">// 读取的文件路径，回调函数(error,data)</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./hello.txt&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, res</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;文件读取失败！&#x27;</span>)</span><br><span class="line">  <span class="comment">// 得到的是二进制数据被转为16进制数据,可以用toString()方法</span></span><br><span class="line">  <span class="built_in">console</span>.log(res.toString())</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// ====================写入文件功能===========================</span></span><br><span class="line"><span class="comment">// 路径,内容y,回调函数（error）</span></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./你好.md&#x27;</span>, <span class="string">&#x27;你好，nodejs&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;文件写入失败！&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;文件写入成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 通过error判断是否有错误发生</span></span><br></pre></td></tr></table></figure></li>
+<li>使用node搭建服务器，并处理请求<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用node搭建web服务器</span></span><br><span class="line"><span class="comment">// node中有一个核心模块http, http的职责就是创建编写服务器</span></span><br><span class="line"><span class="keyword">let</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"><span class="comment">// 1. 创建web服务器返回server实例</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer()</span><br><span class="line"><span class="comment">// 2. 服务器提供服务,对数据的服务,接收请求，处理，给反馈</span></span><br><span class="line"><span class="comment">// request可以用于获取参数</span></span><br><span class="line"><span class="comment">// response可以给用户响应消息</span></span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;请求路径是&#x27;</span>+request.url)</span><br><span class="line">    response.write(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    response.write(<span class="string">&#x27;nodejs&#x27;</span>)</span><br><span class="line">    response.end()</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 3. 绑定端口号</span></span><br><span class="line">server.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;服务器启动成功，可以通过http://localhost:3000/ 来访问&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
 <ul>
-<li>接口达成jar包，通过socket通信</li>
-<li>java封装的RMI，不支持跨语言</li>
-<li>http+XML webservice，支持跨语言</li>
-<li>http+json更加轻量化从，不用传输XML，后面就统一叫RPC</li>
+<li>根据不同的url返回不同的数据<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.获取请求路径</span></span><br><span class="line">  <span class="keyword">let</span> url = req.url</span><br><span class="line">  <span class="comment">// 2.判断路径处理相应</span></span><br><span class="line">  <span class="keyword">if</span>(url === <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">// 一般&#x27;/&#x27;都对应着首页</span></span><br><span class="line">    <span class="comment">// 相应内容必须是字符串或者二进制数据，不能是数字布尔啥的</span></span><br><span class="line">    <span class="comment">// JSON.stringify(data)转成字符串</span></span><br><span class="line">    res.end(<span class="string">&#x27;index page&#x27;</span>)</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(url === <span class="string">&quot;/login&quot;</span>) &#123;</span><br><span class="line">    res.end(<span class="string">&#x27;login&#x27;</span>)</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    res.end(<span class="string">&quot;404 not found&quot;</span>)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="nodejs的核心模块"><a href="#nodejs的核心模块" class="headerlink" title="nodejs的核心模块"></a>nodejs的核心模块</h3>node中为js提供了很多服务器级别的API，绝大多数都被包装到了一个具名的核心模块中</li>
 </ul>
-<p>3.RPC使用到哪些技术？</p>
 <ul>
-<li>如何建立通信：成熟的网络通信框架，dubbo和motan使用的都是netty</li>
-<li>如何进行网络传输：传输数据序列化和反序列化，Hessian</li>
-<li>服务注册于发现：负载均衡算法，服务下线或者变更的时候，生产者和消费者之间要能保持正常的通讯<ul>
-<li>zookeeper：dubbo+zookeeper是标配，主CP</li>
-<li>eureka: 从2.0开始netflix停更了</li>
-<li>nacos：来自阿里，可以在CP和AP之间切换，中庸之道 </li>
-</ul>
-</li>
-</ul>
-<p>4.关于配置管理：</p>
-<ul>
-<li>一些配置比较稳定，不怎么更改，适合在配置文件中随项目一起发布</li>
-<li>一些配置变更频繁，适合使用配置中心修改（一般是用发布订阅模式） 常用配置中心选型<ul>
-<li>Apollo 携程的开源分布式配置中心，基于spring boot&amp;cloud</li>
-<li>disconf 百度，基于zookeeper的watch机制</li>
-<li>nacos 支持服务发现和配置管理功能<h2 id="Dubbo-SpringCloud"><a href="#Dubbo-SpringCloud" class="headerlink" title="Dubbo+SpringCloud"></a>Dubbo+SpringCloud</h2></li>
-</ul>
-</li>
-</ul>
-<p>1.dubbo强依赖于zookeeper注册中心，如果还想要实现服务治理的周边功能<em>比如配置中心/服务跟踪</em>,就需要集成其他的组件支持</p>
-<ul>
-<li>功能对比<br>  <strong>注册中心</strong>:依赖zookeeper<br>  <strong>分布式配置</strong>:可以使用diamond或者淘宝的开源组件xconfig<br>  <strong>分布式调用跟踪</strong>:应用扩展Filter用Zippin来做服务跟踪<br>  <strong>限流降级</strong>：可以使用开源的Sentinel组件，或者自定义Filter实现</li>
-<li>调用方式<br>  <strong>Dubbo</strong>使用RPC协议通讯，性能更高<br>  <strong>SpringCloud</strong>使用http协议的RESTful API调用，可以更好的解耦</li>
-<li>开发成本<br>  dubbo的自定义功能需要实现各种Filter进行定制，相比之下SpringCloud有很多开源的实现，开发更方便<br>简单来说，两者的咪表不同，dubbo看重的是远程服务调用，SpringCloud更加侧重的是微服务生态，覆盖更多的场景</li>
-</ul>
-<p>2.SpringCloudAlibaba是SpringCloud整合了阿里巴巴的<br>  开源组件如Sentinel(流量控制，熔断降级)/Nacos/RocketMQ/Seata(分布式事务解决方案)<br>  平台服务：阿里云OSS云对象存储服务/SchedulerX分布式任务调度/SMS覆盖全球的短信服务</p>
-<h2 id="Dubbo源码"><a href="#Dubbo源码" class="headerlink" title="Dubbo源码"></a>Dubbo源码</h2><p>1.Dubbo源码核心模块<br>  common(公共逻辑)/remoting(远程通信)/rpc(远程调用协议)/cluster(集群管理)/registry(注册中心交互)/moniter(监控)/config(配置规则解析)/metadata(元数据)/configcenter(动态配置)<br>2.Dubbo的配置总线(URL):protpcpl://username:password@host:port+/path?key=value&amp;key=value,这个URL中包含很多信息包名类名方法参数啥的<br>3.Dubbo使用SPI机制加载插件：针对厂商/框架/开发人员或者插件使用的一种技术<br>  首先要了解什么是OCP，“对扩展开放，对修改封闭”，Dubbo采用了微内核+插件的架构，当某个接口被@SPI修饰的额时候，这个接口就试扩展接口，注解的value指定扩展名，扩展名和扩展实现组成SPI的KV对<br>  <strong>Dubbo SPI解决了JAVA SPI的资源浪费的问题，还对SPI配置文件扩展和修改</strong><br>4.netty协议采用Reactor线程模型设计，是面向缓冲区的异步IO流。Reactor模式也被称为Dispatcher模式，核心原理是Seletor负责监听IO事件，在监听到IO事件之后，分发给相关线程进行处理</p>
-<ul>
-<li>Chnnel组件时Netty对网络连接的抽象，核心功能时执行网络IO操作，不同阻塞类型的连接对应不同的Chnnel</li>
-<li>Selector是Netty对多路复用器的抽象，selector内部会不断查询注册的channel是否有已经就绪的IO事件</li>
-<li>NioEventLoop表示一个不断循环，执行处理任务的线程驱动，三件事，监听IO事件（读写事件/网络连接事件）/执行普通任务/执行定时任务</li>
-<li>ByteBuf是数据容器，发送端和接收端都需要这个高效的数据容器存储字节，分为Unpooled和pooled两种</li>
-</ul>
-<p>5.Registry接口</p>
-<ul>
-<li>node接口抽象节点的概念，可以表示服务节点，消费节点，还能表示注册中心节点</li>
-<li>RegistryService接口抽象了注册服务的基本行为，注册取消注册，订阅取消订阅</li>
-<li>Registry接口继承上面两个接口，表示的是一个由注册中心能力的节点，<strong>Registry是应用本地注册中心的客户端，真正的注册中心是独立部署的（比如zookeeper）</strong></li>
-<li>RegistryFactory接口是Registry的工厂接口，负责创建Registry对象</li>
-<li>AbstractRegistry抽象类实现了Registry接口，所有的Registry接口实现类都继承了这个抽象类<ul>
-<li>本地缓存，缓存当前节点订阅的URL信息</li>
-<li>注册、订阅</li>
-<li>回复、销毁，针对provider</li>
-</ul>
-</li>
-</ul>
-<p>6.FailbackRegistry：覆盖AbstractRegistry的五个核心方法，为了保证服务的可靠性，真实系统中的重试机制是必不可少的。请求失败的时候，客户端会重新发起一个一模一样的请求，尝试调用相同或不同的服务端，万层相应的业务操作，Dubbo将这个功能放到了AbstractRegistry的子类中</p>
-<p>7.dubbo对zookeeper的支持，<strong>这里能看出来是真爱了，专门给人家整了俩包</strong><br>dubbo-remoting-zookeeper模块有两个对象</p>
-<ul>
-<li>ZookeeperTransporter：创建zookeeperClient对象</li>
-<li>ZookeeperClient：dubbo疯转的客户端，有大量用来交互的方法<br>dubbo-registry-zookeeper模块还会连接一个状态监听器，会根据连接状态重新注册、订阅，防止数据丢失</li>
+<li>文件操作的fs</li>
+<li>http模块</li>
+<li>path路径操作模块</li>
+<li>os操作系统信息模块<br>想要使用模块的时候就要引入模块,使用require加载具名模块<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -466,11 +419,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E7%9F%A5%E8%AF%86/" rel="tag"># 知识</a>
+            <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
           
-            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"># 分布式</a>
-          
-            <a href="/tags/dubbo/" rel="tag"># dubbo</a>
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
           
         </div>
       
@@ -483,8 +434,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/01/25/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="next" title="区块链">
-                <i class="fa fa-chevron-left"></i> 区块链
+              <a href="/2021/04/18/diary0418/" rel="next" title="diary0418">
+                <i class="fa fa-chevron-left"></i> diary0418
               </a>
             
           </div>
@@ -492,10 +443,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/01/27/0127note/" rel="prev" title="0127note">
-                0127note <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -653,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">服务调用（上）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%B5%85%E8%B0%88"><span class="nav-number">1.1.</span> <span class="nav-text">分布式服务浅谈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo-SpringCloud"><span class="nav-number">1.2.</span> <span class="nav-text">Dubbo+SpringCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo%E6%BA%90%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">Dubbo源码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E8%A7%81nodejs"><span class="nav-number">1.</span> <span class="nav-text">初见nodejs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-JavaScript%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="nav-number">2.</span> <span class="nav-text">nodejs - JavaScript运行时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.</span> <span class="nav-text">nodejs的核心模块</span></a></li></ol></li></ol></div>
             
 
           </div>
