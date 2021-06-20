@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-fill-left.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,Alios," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="近期总结最近都没怎么更新，确实时发生了很多事情。开始开发一个AliOS的项目，发现aliOS开发者文档写的是真的不好，网络上也很少有这方面的资料，一段时间开发工作很不顺利，后面可能有机会要补一些安卓的知识。不过现在对ts的掌握程度比之前强很多了，也会理解各种js&#x2F;ts框架之间相通的地方，事件传递的机制，组件之间的交互，页面容器的知识等等。 杂项 js中只有double类型的数字，因此位计算的能力不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0620note">
+<meta property="og:url" content="https://gwing77.github.io.git/2021/06/20/0620note/index.html">
+<meta property="og:site_name" content="iidmx">
+<meta property="og:description" content="近期总结最近都没怎么更新，确实时发生了很多事情。开始开发一个AliOS的项目，发现aliOS开发者文档写的是真的不好，网络上也很少有这方面的资料，一段时间开发工作很不顺利，后面可能有机会要补一些安卓的知识。不过现在对ts的掌握程度比之前强很多了，也会理解各种js&#x2F;ts框架之间相通的地方，事件传递的机制，组件之间的交互，页面容器的知识等等。 杂项 js中只有double类型的数字，因此位计算的能力不">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-06-20T10:45:25.000Z">
+<meta property="article:modified_time" content="2021-06-20T13:28:42.425Z">
+<meta property="article:author" content="jiayi.li">
+<meta property="article:tag" content="webpack">
+<meta property="article:tag" content="Alios">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://gwing77.github.io.git/2021/06/20/0620note/"/>
+
+
+
+
+
+  <title>0620note | iidmx</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iidmx</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gwing77.github.io.git/2021/06/20/0620note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iidmx">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">0620note</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-20T18:45:25+08:00">
+                2021-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读数量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="近期总结"><a href="#近期总结" class="headerlink" title="近期总结"></a>近期总结</h2><p>最近都没怎么更新，确实时发生了很多事情。<br>开始开发一个AliOS的项目，发现aliOS开发者文档写的是真的不好，网络上也很少有这方面的资料，一段时间开发工作很不顺利，后面可能有机会要补一些安卓的知识。不过现在对ts的掌握程度比之前强很多了，也会理解各种js/ts框架之间相通的地方，事件传递的机制，组件之间的交互，页面容器的知识等等。</p>
+<h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><ul>
+<li>js中只有double类型的数字，因此位计算的能力不如java，计算之前需要把double转化成int才行</li>
+<li>babel-plugin-transform-runtime： 解决API方法转义时给原型添加方法可能发生冲突的问题（api方法从模块统一引入），解决同一个发法可能被反复定义好多次的问题（helpers方法从模块中统一引入），helpers方法就是针对Class、typeof等等syntax方法，babel内部定义的辅助函数</li>
+<li>extract-text-webpack-plugin：4.x版本前webpack使用CSS分离插件，4.x以后使用的是mini-css-extract-plugin</li>
+<li>transform-vue-jsx: 用于编译使用jsx写的vue组件，有三种属性props组件属性，attrs普通的html属性和domProps是DOM的属性（innerHtml）</li>
+<li>vuex-persistedstate：使用本地存储（默认localstorage，可以配置为session）存储状态机内容</li>
+<li>函数防抖和节流：函数防抖debounce：将几次操作合并为一此操作进行。原理是维护一个计时器，规定在delay时间后触发函数，但是在delay时间内再次触发的话，就会取消之前的计时器而重新设置。这样一来，只有最后一次操作能被触发。<ul>
+<li>函数节流throttle：使得一定时间内只触发一次函数。原理是通过判断是否到达一定时间来触发函数。</li>
+<li>区别： 函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，而函数防抖只是在最后一次事件后才触发一次函数。 比如在页面的无限加载场景下，我们需要用户在滚动页面时，每隔一段时间发一次 Ajax 请求，而不是在用户停下滚动页面操作时才去请求数据。这样的场景，就适合用节流技术来实现。</li>
+</ul>
+</li>
+<li>SSR和CSR，服务端渲染和客户端渲染，首屏加载速度，nuxt.js是vue的ssr框架</li>
+<li>原型链protoType<ul>
+<li>所有引用类型都有一个<strong>proto</strong>(隐式原型)属性，属性值是一个普通的对象</li>
+<li>所有函数都有一个prototype(原型)属性，属性值是一个普通的对象</li>
+<li>所有引用类型的__proto__属性指向它构造函数的prototype</li>
+</ul>
+</li>
+<li>闭包：其实就是在方法里面引用方法外面的变量，刚好符合了闭包的规则。想要在函数外面引用函数里面定义的局部变量就需要在外面再套一层函数，使用函数的返回值。它的最大用处有两个，一个是可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中，定义一个数之后操作加减，结果始终在内存里不会被回收</li>
+</ul>
+<h2 id="Alios分享"><a href="#Alios分享" class="headerlink" title="Alios分享"></a>Alios分享</h2><p>暂时先写一些，可能后续也不会再更吧..</p>
+<ul>
+<li>在xml标签中加载listView的方法,这里可以看到很多东西，插值表达式是不支持数字的必须变成字符串，属性是支持三元表达式的，scrollBar可以直接在页面里面拿元素过来用,compountButton的用法是在里面写一个View（下面会贴一下他的Css）<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xml</span> <span class="attr">name</span>=<span class="string">&quot;才发现xml只能有一个根标记，我这悲伤的基础知识&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ListView</span> <span class="attr">scrollBarCustomized</span>=<span class="string">&quot;true&quot;</span> <span class="attr">verticalScrollBar</span>=<span class="string">&quot;&#123;view.detailScrollBar&#125;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;listView&quot;</span> <span class="attr">adapter:data</span>=<span class="string">&quot;&#123;&#123;dataList&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">CompositeView</span> <span class="attr">id</span>=<span class="string">&quot;detailList&quot;</span> <span class="attr">layout</span>=<span class="string">&quot;&#123;layout.listContainer&#125;&quot;</span> <span class="attr">propertySetName</span>=<span class="string">&quot;detailList&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">CompositeView</span> <span class="attr">id</span>=<span class="string">&quot;textWrapper&quot;</span> <span class="attr">layout</span>=<span class="string">&quot;&#123;layout.listItems&#125;&quot;</span> <span class="attr">propertySetName</span>=<span class="string">&quot;textWrapper&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span> <span class="attr">propertySetName</span>=<span class="string">&quot;listView_textItem1&quot;</span> <span class="attr">text</span>=<span class="string">&quot;&#123;&#123;new Date(dataList[@index].tripDay).getMonth() + 1 +&#x27;月&#x27;+ new Date(dataList[@index].tripDay).getDate() + &#x27;日&#x27;&#125;&#125;&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span> <span class="attr">propertySetName</span>=<span class="string">&quot;listView_textItem2&quot;</span> <span class="attr">text</span>=<span class="string">&quot;|&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span> <span class="attr">propertySetName</span>=<span class="string">&quot;listView_textItem3&quot;</span> <span class="attr">text</span>=<span class="string">&quot;&#123;&#123;dataList[@index].startAddress === dataList[@index].endAddress ? dataList[@index].startAddress : (dataList[@index].startAddress + &#x27;-&#x27; + dataList[@index].endAddress)&#125;&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">CompositeView</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">CompositeView</span> <span class="attr">id</span>=<span class="string">&quot;buttonWrapper&quot;</span> <span class="attr">propertySetName</span>=<span class="string">&quot;buttonWrapper&quot;</span> <span class="attr">layout</span>=<span class="string">&quot;&#123;layout.listIcons&#125;&quot;</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CompoundButton</span> <span class="attr">text</span>=<span class="string">&quot;&#123;&#123;Math.ceil((new Date(dataList[@index].endTime) - new Date(dataList[@index].startTime))/1000/3600/24) + &#x27;天&#x27; &#125;&#125;&quot;</span> <span class="attr">propertySetName</span>=<span class="string">&quot;mark_btn&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">View</span> <span class="attr">propertySetName</span>=<span class="string">&quot;icon_day&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">CompoundButton</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CompoundButton</span> <span class="attr">text</span>=<span class="string">&quot;&#123;&#123;dataList[@index].photoCount + &#x27;&#x27;&#125;&#125;&quot;</span> <span class="attr">propertySetName</span>=<span class="string">&quot;mark_btn&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">View</span> <span class="attr">propertySetName</span>=<span class="string">&quot;icon_camera&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">CompoundButton</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CompoundButton</span> <span class="attr">text</span>=<span class="string">&quot;&#123;&#123;dataList[@index].vlogCount + &#x27;&#x27;&#125;&#125;&quot;</span> <span class="attr">propertySetName</span>=<span class="string">&quot;mark_btn&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">View</span> <span class="attr">propertySetName</span>=<span class="string">&quot;icon_vlog&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">CompoundButton</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CompoundButton</span> <span class="attr">text</span>=<span class="string">&quot;&#123;&#123;dataList[@index].heartpointCount + &#x27;&#x27;&#125;&#125;&quot;</span> <span class="attr">propertySetName</span>=<span class="string">&quot;mark_btn&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">View</span> <span class="attr">propertySetName</span>=<span class="string">&quot;icon_mark&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">CompoundButton</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">CompositeView</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">CompositeView</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ListView</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- CompoundButton的样式表，注意这里的坑，只要有layoutDirection就可以了，官网上给了必须指明layoutType有，加上页面就崩了  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property-set</span> <span class="attr">name</span>=<span class="string">&quot;mark_btn&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;layoutWidth&quot;</span>&gt;</span>&#123;sdp(101)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;layoutHeight&quot;</span>&gt;</span>&#123;sdp(44)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;bottomPadding&quot;</span>&gt;</span>&#123;sdp(0.5)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;leftPadding&quot;</span>&gt;</span>&#123;sdp(11)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;borderRadius&quot;</span>&gt;</span>&#123;sdp(22)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;spacing&quot;</span>&gt;</span>&#123;sdp(4)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;layoutDirection&quot;</span>&gt;</span>&#123;enum.CompoundButton.LayoutDirection.RIGHTLEFT&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;background&quot;</span>&gt;</span>#58697C4D<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;fontFamily&quot;</span>&gt;</span>MYingHei_18030-Medium<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;fontSize&quot;</span>&gt;</span>&#123;sdp(24)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;fontWeight&quot;</span>&gt;</span>&#123;enum.TextView.FontWeight.Normal&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span>&gt;</span>#FFFFFFFF<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;textWidth&quot;</span>&gt;</span>&#123;sdp(44)&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;textAlign&quot;</span>&gt;</span>&#123;enum.TextView.Align.Left&#125;<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property-set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xml</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>说一下listView的一些用法，直接上代码<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// listView的更新，注意必须要给到adapter这个ondataChange的事件</span></span><br><span class="line">    <span class="keyword">const</span> adapter = &lt;BaseAdapter&gt;listView.adapter;</span><br><span class="line">    adapter.data = <span class="built_in">this</span>.dataList</span><br><span class="line">    adapter.onDataChange()</span><br><span class="line"><span class="comment">// listView的点击事件，利用position去选取元素，注意这里代码中定义的ID居然也是可以用的，因为遍历之后正常有好多同ID的东西，看来是在view内的局部id，我这里做的很多操作是去修改背景，很难受的就是alios针对view的multistate只有normal/pressed/disabled而没有selected</span></span><br><span class="line"><span class="built_in">this</span>.listView.on(<span class="string">&quot;itemselect&quot;</span>, <span class="function">(<span class="params">itemView: View, position: <span class="built_in">number</span></span>) =&gt;</span> &#123;</span><br><span class="line">    itemView.background = <span class="string">&quot;linear-gradient(135deg, #57646F 0%, #2C343C 100%)&quot;</span></span><br><span class="line">    <span class="built_in">this</span>.simpleListView.children[position].background = <span class="string">&quot;linear-gradient(135deg, #57646F 0%, #2C343C 100%)&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (position === <span class="built_in">this</span>.lastSelectedPosition) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">let</span> buttonWrapper = &lt;CompositeView&gt;itemView.findViewById(<span class="string">&#x27;buttonWrapper&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> buttons = <span class="xml">&lt;CompoundButton[]&gt;buttonWrapper.children</span></span><br><span class="line"><span class="xml">    buttons.forEach(button=&gt; &#123;</span></span><br><span class="line"><span class="xml">        button.background = &quot;linear-gradient(90deg, #707E95 0%, #5A6578 100%)&quot;</span></span><br><span class="line"><span class="xml">    &#125;)</span></span><br><span class="line"><span class="xml">    if (this.lastSelectedButtons) &#123;</span></span><br><span class="line"><span class="xml">        this.listView.children[this.lastSelectedPosition].background = &quot;#5B646E33&quot;</span></span><br><span class="line"><span class="xml">        this.simpleListView.children[this.lastSelectedPosition].background = &quot;#5B646E33&quot;</span></span><br><span class="line"><span class="xml">        this.lastSelectedButtons.forEach(button=&gt; &#123;</span></span><br><span class="line"><span class="xml">            button.background = &quot;#58697C4D&quot;</span></span><br><span class="line"><span class="xml">        &#125;)</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">    this.lastSelectedButtons = buttons</span></span><br><span class="line"><span class="xml">    this.lastSelectedPosition = position</span></span><br><span class="line"><span class="xml">    // 根据当前listView日期筛选心动点/拍照点/vlog点列表</span></span><br><span class="line">    const adapter = &lt;BaseAdapter&gt;this.listView.adapter;</span><br><span class="line">    this.model.filterPoints(adapter, position)</span><br><span class="line">    this.resetMap()</span><br><span class="line">    this.drawPoi(1) // poi</span><br><span class="line">    this.drawPoi(2) // vlog</span><br><span class="line">    this.drawPoi(3) // photo</span><br><span class="line">    this.fitMap()</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>事件传递机制,这中emit的机制已经在很多框架中见过了，之前接触过angular和vue<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先定义监控事件的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageMonitor</span> <span class="keyword">extends</span> <span class="title">EventEmitter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> instance: PageMonitor;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> getInstance () &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">this</span>.instance) &#123;</span><br><span class="line">            <span class="built_in">this</span>.instance = <span class="keyword">new</span> PageMonitor()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.instance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> PageMonitor = <span class="built_in">require</span>(<span class="string">&#x27;../monitor/PageMonitor&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> pageListener = &lt;PageMonitor&gt;PageMonitor.getInstance()</span><br><span class="line"><span class="comment">// 发送事件</span></span><br><span class="line">pageListener.emit(<span class="string">&#x27;pageChanged&#x27;</span>, data1,data2)</span><br><span class="line"><span class="comment">// 监听事件</span></span><br><span class="line">pageListener.on(<span class="string">&#x27;pageChanged&#x27;</span>, <span class="function">(<span class="params">data1,data2</span>)=&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.menu.visibility = View.Visibility.Hidden</span><br><span class="line">    <span class="built_in">this</span>.tripMenu.visibility = View.Visibility.Visible</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>httpClient的用法，httpClient发送请求得到的返回值默认是Buffer，这里借用了其它老师写的代码，使用了发布订阅的机制处理<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.httpClient.post(</span><br><span class="line">        mockUrl,</span><br><span class="line">        realParams,</span><br><span class="line">        <span class="built_in">this</span>.headers</span><br><span class="line">    )</span><br><span class="line"><span class="comment">// 买个关子，这里得到的是什么呢？</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">opt: IOptions</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> postData = <span class="keyword">new</span> Buffer(<span class="built_in">JSON</span>.stringify(opt.params),<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> (opt.headers != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="built_in">this</span>.headers = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> opt.headers) &#123;</span><br><span class="line">            <span class="keyword">let</span> header = <span class="string">`<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;opt.headers[key]&#125;</span>\r\n`</span></span><br><span class="line">            <span class="built_in">this</span>.headers = <span class="built_in">this</span>.headers.concat(header)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> options = &#123;</span><br><span class="line">        url: opt.url,</span><br><span class="line">        method: opt.method,</span><br><span class="line">        headers: <span class="built_in">this</span>.headers,</span><br><span class="line">        body: postData,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> request = <span class="keyword">new</span> HttpClient(options)</span><br><span class="line">    request.connect(<span class="function">(<span class="params">err, id</span>) =&gt;</span> &#123;</span><br><span class="line">        Logger.i(<span class="string">&#x27;begin request! err:&#x27;</span> + err + <span class="string">&#x27; id:&#x27;</span> + id)</span><br><span class="line">    &#125;)</span><br><span class="line">    request.on(<span class="string">&#x27;response&#x27;</span>, <span class="function">(<span class="params">header: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> err = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">switch</span> (header.code) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">302</span>:</span><br><span class="line">                err = <span class="string">&#x27;登录超时，请重新登录&#x27;</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                err = <span class="string">&#x27;请求成功&#x27;</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        Logger.i(err + <span class="string">&#x27; code:&#x27;</span> + header.code)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> doOnData = fromEvent(request, <span class="string">&#x27;data&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> doOnComplete = fromEvent(request, <span class="string">&#x27;complete&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> observable = doOnData.pipe(</span><br><span class="line">        buffer(doOnComplete),</span><br><span class="line">        map(<span class="function">(<span class="params">buffers: Buffer[]</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> data = Buffer.concat(buffers).toString()</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(data)</span><br><span class="line">            &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">                <span class="keyword">throw</span> error</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;),</span><br><span class="line">        first()</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> observable</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里拿到的observalbe的用法和promise的用法差不多,没错，就这么简单</span></span><br><span class="line">observable.subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    Logger.i(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2>前端性能：减少请求次数，base64代替图片url</li>
+</ul>
+<ol>
+<li><p>手动搭建vue项目，使用webpack5+vue2</p>
+</li>
+<li><p>webpack事件机制tapable，注册异步事件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;npm init -y&#x27;</span> <span class="comment">// -y代表yes，一些询问就会跳过</span></span><br><span class="line">NODE__ENV <span class="comment">// 开发环境（需要安装cross-env包）</span></span><br><span class="line">process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span> ? a: b</span><br></pre></td></tr></table></figure></li>
+<li><p>webpack常见的属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">entry: <span class="comment">// 入口文件mani.js可以有多个</span></span><br><span class="line">output:<span class="comment">// 输出选项</span></span><br><span class="line">resolve:<span class="comment">// extensions省略后缀</span></span><br><span class="line">modules: <span class="comment">// 最核心的包rules：解析规则text匹配文件名规则，loader解析器use多个解析器从后到前处理</span></span><br><span class="line">externals: <span class="comment">// 外部资源=》需要进一步了解，自己的库不提供这个模块，用户需要自己在nodemodules下载</span></span><br><span class="line">plugin:<span class="comment">//额外功能，额外功能与流程解耦</span></span><br><span class="line">optimization:<span class="comment">//打包文件分配逻辑</span></span><br><span class="line">target <span class="comment">// 打包出来实在哪里运行的web、node</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Jenkins.sh： pm2可以启动多个node服务</p>
+</li>
+<li><p>项目发布：分支模式、主干模式，目前都是以变更为单位开发的</p>
+</li>
+<li><p>pipeline斑马的前端发布流程，容器发布（更合理地分配资源）、ECS发布（占用服务器资源）</p>
+</li>
+<li><p>插件是与流程解耦的</p>
+</li>
+<li><p>附上自己写的webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> VueLoaderPlugin = <span class="built_in">require</span>(<span class="string">&#x27;vue-loader/lib/plugin-webpack5&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="built_in">module</span>.exports =  &#123;</span><br><span class="line">    mode: process.NODE_ENV || <span class="string">&quot;development&quot;</span>,</span><br><span class="line">    entry: <span class="string">&#x27;./src/main.js&#x27;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">&#x27;[name].[hash:7].js&#x27;</span>,</span><br><span class="line">        path: path.resolve(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        publicPath: <span class="string">&#x27;/&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    resolve: &#123;</span><br><span class="line">        alias: &#123;</span><br><span class="line">            <span class="string">&#x27;@components&#x27;</span>: path.join(__dirname, <span class="string">&#x27;/components&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;@&#x27;</span>: path.join(__dirname, <span class="string">&#x27;/src&#x27;</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        extensions: [<span class="string">&#x27;.js&#x27;</span>, <span class="string">&#x27;.json&#x27;</span>, <span class="string">&#x27;.vue&#x27;</span>],</span><br><span class="line">        fallback: &#123; <span class="string">&quot;path&quot;</span>: <span class="built_in">require</span>.resolve(<span class="string">&quot;path-browserify&quot;</span>) &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123; <span class="attr">test</span>: <span class="regexp">/\.js$/</span>, loader: <span class="string">&#x27;eslint-loader&#x27;</span>, <span class="attr">include</span>: [path.join(__dirname, <span class="string">&#x27;src&#x27;</span>)] &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                loader: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">                exclude: <span class="regexp">/node_modules/</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123; <span class="attr">test</span>: <span class="regexp">/\.less$/</span>, use: [<span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>, <span class="string">&#x27;less-loader&#x27;</span>], <span class="attr">include</span>: [path.join(__dirname, <span class="string">&#x27;src&#x27;</span>)] &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.(png|jpe?g|gif|svg)(\?.*)?$/</span>,</span><br><span class="line">                loader: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    limit: <span class="number">10000</span>,</span><br><span class="line">                    name: path.posix.join(<span class="string">&#x27;static&#x27;</span>, <span class="string">&#x27;img/[name].[hash:7].[ext]&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.(woff2?|eot|ttf|otf)(\?.*)?$/</span>,</span><br><span class="line">                loader: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    limit: <span class="number">10000</span>,</span><br><span class="line">                    name: path.posix.join(<span class="string">&#x27;static&#x27;</span>, <span class="string">&#x27;fonts/[name].[hash:7].[ext]&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    externals: &#123;</span><br><span class="line">        <span class="string">&quot;Vue&quot;</span>: <span class="string">&quot;vue&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> VueLoaderPlugin(),</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: <span class="string">&quot;index.html&quot;</span>,</span><br><span class="line">            inject: <span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line">    target: <span class="string">&#x27;node&#x27;</span>,</span><br><span class="line">    optimization: &#123;</span><br><span class="line">        splitChunks: &#123;</span><br><span class="line">            cacheGroups: &#123;</span><br><span class="line">                vendor: &#123;</span><br><span class="line">                    test: <span class="regexp">/node_modules/</span>,</span><br><span class="line">                    chunks: <span class="string">&#x27;initial&#x27;</span>,</span><br><span class="line">                    name: <span class="string">&#x27;vendor&#x27;</span>,</span><br><span class="line">                    priority: <span class="number">10</span>,</span><br><span class="line">                    enforce: <span class="literal">true</span></span><br><span class="line">                &#125;,</span><br><span class="line">                commonjs: &#123;</span><br><span class="line">                    chunks: <span class="string">&#x27;initial&#x27;</span>,</span><br><span class="line">                    minChunks: <span class="number">2</span>,</span><br><span class="line">                    maxInitialRequests: <span class="number">5</span>,</span><br><span class="line">                    minSize: <span class="number">0</span></span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">      contentBase: path.join(__dirname,<span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">      port: <span class="number">9000</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+            <a href="/tags/Alios/" rel="tag"># Alios</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/22/0422note/" rel="next" title="0422note">
+                <i class="fa fa-chevron-left"></i> 0422note
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/dog.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/gwing77" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="619647189@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/1gwing" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%91%E6%9C%9F%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">近期总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%82%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">杂项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alios%E5%88%86%E4%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">Alios分享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack"><span class="nav-number">4.</span> <span class="nav-text">webpack</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi.li</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">26.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
